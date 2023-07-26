@@ -6,19 +6,19 @@
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
 
-Servo myservo;  // crea el objeto servo
+Servo myservo;  
 
-// GPIO de salida del servo
+
 static const int servoPin = 13;
 
-// Reemplazar con tus credenciales de Wifi
-const char* ssid = "HUAWEI P20 lite";
-const char* password = "elcabro123";
 
-// Inicializa Bot Telegram
-#define BOTtoken "6234887660:AAE-0I55ju9Rw9TIyGbJX8vCLRameYINUQA"  // Tu Bot Token (Obtener de Botfather)
+const char* ssid = "";
+const char* password = "";
 
-#define CHAT_ID "5879430854"
+
+#define BOTtoken ""  
+
+#define CHAT_ID ""
 
 WiFiClientSecure client;
 
@@ -27,7 +27,7 @@ UniversalTelegramBot bot(BOTtoken, client);
 void handleNewMessages(int numNewMessages) {
 
   for (int i = 0; i < numNewMessages; i++) {
-    // Chat id of the requester
+    
     String chat_id = String(bot.messages[i].chat_id);
     if (chat_id != CHAT_ID) {
       bot.sendMessage(chat_id, "Usuario no autorizado", "");
@@ -52,9 +52,8 @@ void handleNewMessages(int numNewMessages) {
 void setup() {
   Serial.begin(115200);
 
-  myservo.attach(servoPin);  // vincula el servo en el servoPin
-
-  // Conecta a red WiFi con SSID y password
+  myservo.attach(servoPin);  
+  
   Serial.print("Conectado a ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
@@ -64,7 +63,7 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  // Muestra IP local
+  
   Serial.println("");
   Serial.println("WiFi conectado.");
   Serial.println("IP address: ");
